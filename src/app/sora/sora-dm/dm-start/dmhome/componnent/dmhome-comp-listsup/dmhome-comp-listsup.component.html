@@ -1,0 +1,8 @@
+<div class="row">
+  <div class="col s12 m6 l4" *ngFor="let item of models1;let i=index">
+    <div class="collection">
+      <a href="javascript:void(0)" (click)="getsup(item)" class="collection-item" pTooltip="{{item.supname}} มีรายการวัสดุจำนวน {{item.a}} รายการ"
+        tooltipPosition="top"><span class="badge">{{item.a}}</span>{{i+1}} - {{item.supname}}</a>
+    </div>
+  </div>
+</div>

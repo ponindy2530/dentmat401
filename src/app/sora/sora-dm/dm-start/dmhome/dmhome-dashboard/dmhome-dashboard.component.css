@@ -1,0 +1,60 @@
+.container {
+  margin: 0 auto;
+  max-width: 1280px;
+  width: 90%;
+}
+
+.badgesora {
+    padding-top: 1px;
+    padding-bottom: 3px;
+    line-height: 15px;
+}
+
+.badgesora {
+    display: inline-block;
+    min-width: 10px;
+    padding: 3px 7px;
+    font-size: 12px;
+    color: #fff;
+    vertical-align: middle;
+    background-color: #777;
+    border-radius: 10px;
+    color: black;
+}
+
+.modal{
+    width: 80%;
+    max-height: 1000px;
+}
+
+.pbz{
+    font-weight: bold;
+    font-size: 1em;
+    color: black;
+}
+
+
+
+
+@media screen and (max-width: 480px){
+	#grid[data-columns]::before {
+		content: '';
+	}
+}
+
+@media screen and (min-width: 481px) and (max-width: 768px) {
+	#grid[data-columns]::before {
+		content: '';
+	}
+}
+@media screen and (min-width: 769px) {
+	#grid[data-columns]::before {
+		content: '';
+	}
+}
+
+/* Again, you’re free to use and define the classes: */
+.column { float: left; }
+.size-1of1 { width: 100%; }
+.size-1of2 { width: 50%; }
+.size-1of3 { width: 33.333%; }

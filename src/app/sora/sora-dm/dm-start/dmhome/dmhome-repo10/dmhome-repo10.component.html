@@ -1,0 +1,23 @@
+<!--<div class="container">
+  <div class="card">
+    <nav class="dark-primary-color ">
+      <div class="nav-wrapper">
+        <div class="divider"></div>
+        <ul class="left">
+          <li><a [routerLink]="['../dmhomerepostock']"><i class="material-icons left">view_module</i> วัสดุไกล้หมด</a></li>
+          <li><a [routerLink]="['../dmhomerepo']"><i class="material-icons left">search</i> วัสดุไกล้ Expire</a></li>
+          <li><a [routerLink]="['../dmhomerepo10']"><i class="material-icons left">list</i> มูลค่าสินค้ามากที่สุด 10 ตัว</a></li>
+        </ul>
+      </div>
+    </nav>
+    <div class="collection">
+      <a  *ngFor="let item of models;let i=index" pTooltip="จำนวนวัสดุปัจจุบัน {{item.numnow}} {{item.munit}}"
+        tooltipPosition="top"  class="collection-item"><span class="badge">{{item.pricenow|number}} บาท</span>{{i+1}} - {{item.mcode}} | {{item.mname}} </a>
+    </div>
+  </div>
+</div>-->
+<div class="collection-header"><h4><i class="material-icons">replay_10</i> มูลค่าสินค้ามากที่สุด 10 ตัว</h4></div>
+<div class="collection">
+  <a *ngFor="let item of models;let i=index" pTooltip="จำนวนวัสดุปัจจุบัน {{item.numnow}} {{item.munit}}" tooltipPosition="top"
+    class="collection-item"><span class="badge">{{item.pricenow|number}} บาท</span>{{i+1}} - {{item.mcode}} | {{item.mname}} </a>
+</div>

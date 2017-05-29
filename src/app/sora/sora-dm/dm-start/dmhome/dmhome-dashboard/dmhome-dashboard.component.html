@@ -1,0 +1,265 @@
+<div class="container">
+  <div class="row">
+    <div class="col s12 m12 l12">
+      <div class="card">
+        <div class="card-image">
+          <nav class="teal lighten-2">
+            <div class="nav-wrapper">
+              <div class="divider"></div>
+              <ul class="left">
+                <li><a [routerLink]="['../dmmainlistcat']"><i class="material-icons left">view_module</i> บัญชีวัสดุทันตกรรม</a></li>
+              </ul>
+            </div>
+          </nav>
+          <button class="btn-floating btn-large halfway-fab waves-effect waves-light  blue accent-3" pTooltip="เพิ่มข้อมูล" tooltipPosition="top"
+            [routerLink]="'../dmmainadd'" routerLinkActive="active"><i class="material-icons">add</i></button>
+        </div>
+        <div class="card-content">
+
+          <div class="row">
+            <div class="input-field col s12 search">
+              <i class="material-icons prefix">search</i>
+              <input #gb type="text">
+              <label for="icon_prefix">ค้นหาข้อมูล</label>
+            </div>
+          </div>
+          <ul class="collapsible" data-collapsible="accordion">
+            <li>
+              <div class="collapsible-header"><i class="material-icons">search</i>ค้นหา ตัวเลือกหมวดหมู่ / บริษัท</div>
+              <div class="collapsible-body">
+                <div class="row">
+                  <div class="col s12">
+                    <ul class="tabs">
+                      <li class="tab col s3"><a class="active" href="#test1">หมวดหมู่</a></li>
+                      <li class="tab col s3"><a href="#test2">บริษัท</a></li>
+                    </ul>
+                  </div>
+                  <div id="test1" class="col s12">
+                    <app-dmhome-comp-listcat (outcatid)="incatid($event)"></app-dmhome-comp-listcat>
+                  </div>
+                  <div id="test2" class="col s12">
+                    <app-dmhome-comp-listsup (outsup)="insup($event)"></app-dmhome-comp-listsup>
+                  </div>
+                </div>
+              </div>
+            </li>
+          </ul>
+
+
+
+
+
+
+
+
+
+
+
+          <p-dataTable *ngIf="dataTable" [value]="models" [rows]="10" [paginator]="true" [pageLinks]="5" [rowsPerPageOptions]="[20,40,60,80,100]"
+            [responsive]="true" sortField="catname" rowGroupMode="subheader" groupField="catname" [globalFilter]="gb">
+            <ng-template pTemplate="rowgroupheader" let-rowData><i class="ace-icon fa fa-folder-open"></i> หมวดหมุ่ : {{rowData['catname']}}</ng-template>
+            <p-column header="ลำดับ" [sortable]="true" [style]="{'width':'60px','text-align':'center'}">
+              <ng-template let-col let-rowData="rowData" let-rowIndex="rowIndex" pTemplate="body">
+                {{rowIndex+1}}
+              </ng-template>
+            </p-column>
+            <p-column field="mcode" header="รหัส" [sortable]="true"></p-column>
+            <p-column field="mname" header="ชื่อวัสดุ" [sortable]="true"></p-column>
+            <p-column field="munit" header="หน่วยนับ" [sortable]="true"  [style]="{'width':'60px','text-align':'center'}"></p-column>
+            <p-column field="numstockin" header="จำนวนรับเข้า" [sortable]="true"  [style]="{'width':'60px','text-align':'center'}"></p-column>
+            <p-column field="numstockout" header="จำนวนเบิกจ่าย" [sortable]="true"  [style]="{'width':'60px','text-align':'center'}"></p-column>
+            <p-column field="numnow" header="จำนวนคงคลัง" [sortable]="true"  [style]="{'width':'60px','text-align':'center'}"></p-column>
+            <p-column field="stck" header="สถานะวัสดุ" [sortable]="true"  [style]="{'width':'110px','text-align':'center'}">
+              <ng-template let-car="rowData" let-rowIndex="rowIndex" pTemplate="body">
+                <span [class]="car.stckcol" pTooltip="คงเหลือขั้นต่ำ : {{car.nummin}} {{car.munit}}" tooltipPosition="top">{{car.stck}}</span>
+              </ng-template>
+            </p-column>
+            <p-column styleClass="col-button" header="รายละเอียด" [style]="{'width':'60px','text-align':'center'}">
+              <ng-template let-car="rowData" let-rowIndex="rowIndex" pTemplate="body">
+                <a class="btn-floating btn-small purple" href="#modal1" pTooltip="รายละเอียด" tooltipPosition="top" (click)="getsearch(car)"> <i class="material-icons">search</i></a>
+              </ng-template>
+            </p-column>
+            <p-column styleClass="col-button" header="แก้ไขข้อมูล" [style]="{'width':'60px','text-align':'center'}">
+              <ng-template let-car="rowData" let-rowIndex="rowIndex" pTemplate="body">
+                <a class="btn-floating btn-small teal" href="javascript:void(0)" pTooltip="แก้ไขข้อมูล" tooltipPosition="top" (click)="edit(car)"> <i class="material-icons">mode_edit</i></a>
+              </ng-template>
+            </p-column>
+            <p-column styleClass="col-button" header="ลบข้อมูล" [style]="{'width':'60px','text-align':'center'}">
+              <ng-template let-car="rowData" let-rowIndex="rowIndex" pTemplate="body">
+                <a class="btn-floating btn-small red" href="javascript:void(0)" pTooltip="ลบข้อมูล" tooltipPosition="top" (click)="delete(car,rowIndex)"> <i class="material-icons">delete</i></a>
+              </ng-template>
+            </p-column>
+          </p-dataTable>
+
+
+          <div class="card-image" *ngIf="fedit">
+            <nav class="dark-primary-color ">
+              <div class="nav-wrapper">
+                <div class="divider"></div>
+                <ul class="left">
+                  <li><a><i class="material-icons left">mode_edit</i> แก้ไขข้อมูลบัญชีวัสดุทันตกรรม</a></li>
+                </ul>
+              </div>
+            </nav>
+            <button class="btn-floating halfway-fab waves-effect waves-light green" pTooltip="บันทึก" tooltipPosition="top" (click)="save();"><i class="material-icons">check</i></button>
+          </div>
+          <div class="card-content" *ngIf="fedit">
+            <form (ngSubmit)="save()">
+              <div class="row">
+                <div class="col s12 m6 l6">
+                  <div class="input-field col s12">
+                    <input class="pbz" placeholder="" type="text" [(ngModel)]="model.mcode" id="mcode" name="mcode">
+                    <label class="pbz">รหัสวัสดุทันตกรรม</label>
+                  </div>
+                </div>
+                <div class="col s12 m6 l6">
+                  <div class="input-field col s12">
+                    <input class="pbz" placeholder="" type="text" [(ngModel)]="model.mname" id="mname" name="mname">
+                    <label class="pbz">ชื่อวัสดุทันตกรรม</label>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col s12 m6 l6">
+                  <div class="input-field col s12">
+                    <input class="pbz" placeholder="" type="text" [(ngModel)]="model.munit" name="munit" id="munit">
+                    <label class="pbz">หน่วยนับ</label>
+                  </div>
+                </div>
+                <div class="col s12 m6 l6">
+                  <div class="input-field col s12">
+                    <select class="browser-default pbz" [(ngModel)]="model.catid" name="catid" id="catid">
+                      <option [value]="0" disabled selected>เลือกหมวดหมู่</option>
+                      <option *ngFor="let item of models5;let i=index" [value]="item.catid">{{i+1}} - {{item.catname}}</option>
+                  </select>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col s12 m6 l6">
+                  <div class="input-field col s12">
+                    <input class="pbz" placeholder="" [(ngModel)]="model.nummin" id="nummin" name="nummin" type="number">
+                    <label class="pbz">Min</label>
+                  </div>
+                </div>
+                <div class="col s12 m6 l6">
+                  <div class="input-field col s12">
+                    <input class="pbz" placeholder="" type="text" [(ngModel)]="model.tag" id="tag" name="tag">
+                    <label class="pbz">Tag</label>
+                  </div>
+                </div>
+                <button class="btn-floating halfway-fab waves-effect waves-light red" pTooltip="ยกเลิก" tooltipPosition="top" (click)="fcancel();"><i class="material-icons">cancel</i></button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<!-- Modal Structure -->
+<div id="modal1" class="modal">
+  <div class="modal-content">
+    <p-panel header="รายละเอียด" [toggleable]="true">
+      <div class="row">
+        <div class="card" style="margin:10px">
+          <div class="card-content">
+            <h4 class="header">
+              รหัสวัสดุ :: {{showProduct && showProduct['mcode'] }}<br /> ชื่อวัสดุ :: {{showProduct && showProduct['mname']}}
+            </h4>
+            <h6> ยอดยกมา :: {{showProduct && showProduct['historical']}} {{ showProduct && showProduct['munit']}} มูลค่า : {{showProduct
+              && showProduct['historicalvalue']}} บาท</h6>
+            <h6> จำนวนคงคลัง :: {{models1|sums2:'numstockin':'numstockout' |number}} {{showProduct && showProduct['munit'] }}
+            </h6>
+            <h6> มูลค่าคงคลัง :: {{models1|sums2:'pricelot':'priceout' |number}} บาท</h6>
+          </div>
+          <a class="btn-floating halfway-fab waves-effect waves-light red" pTooltip="ปิดหน้าต่าง" tooltipPosition="top" (click)="doCancel()"><i class="material-icons">cancel</i></a>
+        </div>
+      </div>
+      <p-dataTable [value]="models1" scrollable="true" scrollHeight="200px">
+        <p-column header="ลำดับ" [sortable]="true" [style]="{'width':'60px','text-align':'center'}">
+          <ng-template let-col let-rowData="rowData" let-rowIndex="rowIndex" pTemplate="body">
+            {{rowIndex+1}}
+          </ng-template>
+        </p-column>
+        <p-column field="notelot" header="หมายเหตุ" [style]="{'text-align':'center'}"></p-column>
+        <p-column field="datestock" header="วันที่ทำรายการ" [style]="{'text-align':'center'}"></p-column>
+        <p-column field="supname" header="บริษัท" [style]="{'text-align':'center'}"></p-column>
+        <p-column field="numstockin" header="จำนวนรับเข้า" [style]="{'text-align':'center'}"></p-column>
+        <p-column field="pricen" header="ราคา/น" [style]="{'text-align':'center'}"></p-column>
+        <p-column field="pricelot" header="มูลค่า" [style]="{'text-align':'center'}"></p-column>
+        <p-column field="numstockout" header="จำนวนเบิกจ่าย" [style]="{'text-align':'center','color':'#ff00aa'}"></p-column>
+        <p-column field="priceout" header="มูลค่า" [style]="{'text-align':'center','color':'#ff00aa'}"></p-column>
+        <p-column field="rcname" header="ผู้เบิกจ่าย" [style]="{'text-align':'center','color':'#ff00aa'}"></p-column>
+        <p-footerColumnGroup>
+          <p-row>
+            <p-column footer="รวม :" colspan="4"></p-column>
+            <p-column footer="{{models1|sums:'numstockin'|number}}"></p-column>
+            <p-column footer="{{models1|sums:'pricen'|number}}"></p-column>
+            <p-column footer="{{models1|sums:'pricelot'|number}}"></p-column>
+            <p-column footer="{{models1|sums:'numstockout'|number}}"></p-column>
+            <p-column footer="{{models1|sums:'priceout'|number}}"></p-column>
+            <p-column></p-column>
+          </p-row>
+        </p-footerColumnGroup>
+      </p-dataTable>
+    </p-panel>
+  </div>
+  <div class="modal-footer">
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+<div class="container">
+
+
+
+
+
+  <br />
+
+
+  <div id="grid" data-columns>
+    <div class="column size-1of2">
+      <div>
+        <div class="col s12 m6 l6">
+          <app-dmhome-repostock></app-dmhome-repostock>
+        </div>
+      </div>
+      <div>
+        <div class="col s12 m6 l6">
+          <app-dmhome-repo></app-dmhome-repo>
+        </div>
+      </div>
+    </div>
+    <div class="column size-1of2">
+      <div>
+        <div class="col s12 m6 l6">
+          <app-dmhome-repo10></app-dmhome-repo10>
+        </div>
+      </div>
+      <div>
+        <div class="col s12 m6 l6">
+          <!--<app-dmhome-repostock></app-dmhome-repostock>-->
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+</div>

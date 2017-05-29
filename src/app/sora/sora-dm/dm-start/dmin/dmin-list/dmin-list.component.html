@@ -1,0 +1,18 @@
+<div class="container">
+  <div class="card">
+    <nav class="dark-primary-color ">
+      <div class="nav-wrapper">
+        <div class="divider"></div>
+        <ul class="left">
+          <li><a [routerLink]="['../dminrepo']"><i class="material-icons left">skip_previous</i> ย้อนกลับ</a></li>
+          <li><a [routerLink]="['../dminsearch']"><i class="material-icons left">search</i> ค้นหา</a></li>
+          <li><a [routerLink]="['../dminlist']"><i class="material-icons left">list</i> เลือกชื่อบริษัท</a></li>
+          <li><a [routerLink]="['../dminrepo']"><i class="material-icons left">view_module</i> ทั้งหมด</a></li>
+        </ul>
+      </div>
+    </nav>
+    <div class="collection">
+      <a href="javascript:void(0)" *ngFor="let item of models;let i=index"  (click)="getcat(item)" class="collection-item"><span class="badge">{{item.a}} รายการ</span>{{i+1}} - {{item.supname}} </a>
+    </div>
+  </div>
+</div>

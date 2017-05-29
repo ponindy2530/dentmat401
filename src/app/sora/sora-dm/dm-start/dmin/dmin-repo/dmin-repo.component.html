@@ -1,0 +1,125 @@
+<div class="container">
+    <div class="card">
+        <nav class="dark-primary-color ">
+            <div class="nav-wrapper">
+                <div class="divider"></div>
+                <ul class="left">
+                    <li><a [routerLink]="['../dminadd']"><i class="material-icons left">view_module</i> บัญชีรับเข้า</a></li>
+                </ul>
+            </div>
+        </nav>
+
+        <p-dataTable [value]="models" [responsive]="true" sortOrder="-1"  sortField="datestockin" rowGroupMode="subheader" groupField="datestockin"
+            [rows]="20" [paginator]="true" [pageLinks]="5" [rowsPerPageOptions]="[20,50,100,200,300]">
+            <p-header><span class="secondary-text-color">รายการบัญชีรับเข้า</span>
+                <a class="btn-floating btn-large left waves-effect waves-light blue" pTooltip="เพิ่มข้อมูล" tooltipPosition="top" [routerLink]="'../dminadd'"
+                    routerLinkActive="active"><i class="material-icons">add</i></a>
+            </p-header>
+            <ng-template pTemplate="rowgroupheader" let-rowData><i class="ace-icon fa fa-calendar"></i> วันที่รับเข้า : {{rowData['datestockin']}}</ng-template>
+            <p-column header="ลำดับ" [sortable]="true" [style]="{'width':'60px','text-align':'center'}">
+                <ng-template let-col let-rowData="rowData" let-rowIndex="rowIndex" pTemplate="body">
+                    {{rowIndex+1}}
+                </ng-template>
+            </p-column>
+            <p-column field="mcode" header="รหัส" [sortable]="true" [filter]="true"></p-column>
+            <p-column field="mname" header="ชื่อวัสดุ" [sortable]="true" [filter]="true"></p-column>
+            <p-column field="supname" header="บริษัท" [sortable]="true" [filter]="true"></p-column>
+            <p-column field="numstockin" header="จำนวนรับเข้า" [sortable]="true" [filter]="true"></p-column>
+            <p-column field="pricen" header="ราคา/หน่วย" [sortable]="true" [filter]="true"></p-column>
+            <p-column field="pricelot" header="มูลค่ารับเข้า" [sortable]="true" [filter]="true"></p-column>
+            <p-column field="notelot" header="หมายเหตุ" [sortable]="true" [filter]="true"></p-column>
+            <p-column styleClass="col-button" header="ปรับปรุง" [style]="{'text-align':'center'}">
+                <ng-template let-car="rowData" let-rowIndex="rowIndex" pTemplate="body">
+                    <a class="btn-floating btn-small green" href="#modal1" (click)="edit(car)" pTooltip="แก้ไขข้อมูล" tooltipPosition="top">
+                        <i class="large material-icons">mode_edit</i>
+                    </a>
+                </ng-template>
+            </p-column>
+
+            <p-column styleClass="col-button" header="ลบข้อมูล" [style]="{'text-align':'center'}">
+                <ng-template let-car="rowData" let-rowIndex="rowIndex" pTemplate="body">
+                    <a class="btn-floating btn-small red" pTooltip="ลบข้อมูล" tooltipPosition="top" (click)="delect(car)"> 
+                        <i class="material-icons">delete_forever</i>
+                    </a>
+                </ng-template>
+            </p-column>
+
+        </p-dataTable>
+
+    </div>
+</div>
+
+
+
+<!-- Modal Structure -->
+<div id="modal1" class="modal">
+    <div class="modal-content">
+        <p-panel header="แก้ไขข้อมูลบัญชีรับเข้า" [toggleable]="true">
+            <form (ngSubmit)="save();">
+                <div class="row">
+                    <div class="col s2">
+                        <label class="pbz"> Lot ID</label>
+                        <input class="pbz" [(ngModel)]="model.lotid" name="lotid" id="lotid" type="text" disabled>
+                    </div>
+                    <div class="col s5">
+                        <label class="pbz"> รหัสวัสดุ</label>
+                        <input class="pbz" [(ngModel)]="model.mcode" name="mcode" id="mcode" type="text" disabled>
+                    </div>
+                    <div class="col s5">
+                        <label class="pbz"> ชื่อวัสดุ</label>
+                        <input class="pbz" [(ngModel)]="model.mname" name="mname" id="mname" type="text" disabled>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col s6">
+                        <label class="pbz"> วันที่รับเข้า</label>
+                        <input class="pbz" [(ngModel)]="model.datestockin" name="datestockin" id="datestockin" type="date">
+                    </div>
+                    <div class="col s6">
+                        <label class="pbz"> บริษัท **</label>
+                        <select class="browser-default pbz" [(ngModel)]="model.supid" name="supid" id="supid">
+                                <option [value]="0" disabled selected>ตัวเลือก</option>
+                                <option *ngFor="let item of models1" [value]="item.supid">{{item.supid}} - {{item.supname}}</option>
+                            </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col s4">
+                        <label class="pbz"> จำนวนรับเข้า **</label>
+                        <input class="pbz" [(ngModel)]="model.numstockin" id="numstockin" name="numstockin" type="number" (change)="doCalPricelot()">
+                    </div>
+                    <div class="col s4">
+                        <label class="pbz"> ราคาต่อหน่วย **</label>
+                        <input class="pbz" [(ngModel)]="model.pricen" name="pricen" id="pricen" type="number" step="0.01" type="number" (change)="doCalPricelot()">
+                    </div>
+                    <div class="col s4">
+                        <label class="pbz"> มูลคารับเข้า **</label>
+                        <input class="pbz" [(ngModel)]="model.pricelot" name="pricelot" id="pricelot" type="number" step="0.01" (change)="doCalPricen()">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col s6">
+                        <label class="pbz"> เดือนปีหมดอายุ(เช่น 201806)</label>
+                        <input class="pbz" [(ngModel)]="model.expire" name="expire" type="number" id="expire" placeholder="YYYYMM" maxlength="6" (keyup)="getexp($event)">
+                    </div>
+                    <div class="col s6">
+                        <label class="pbz"> หมายเหตุ</label>
+                        <input class="pbz" [(ngModel)]="model.notelot" id="notelot" name="notelot" placeholder="หมายเหตุ" type="text">
+                    </div>
+                </div>
+                <div class="row">
+                    <a class="btn-floating btn-small red right" pTooltip="ปิดหน้าต่าง" tooltipPosition="top" (click)="doCancel()">
+      <i class="small material-icons">cancel</i>
+    </a>
+
+                    <button style="margin-right:5px" type="submit" pTooltip="บันทึก" tooltipPosition="top" class="btn-floating btn-small blue right">
+      <i class="small material-icons">check</i>
+    </button>
+                </div>
+            </form>
+        </p-panel>
+    </div>
+    <div class="modal-footer">
+
+    </div>
+</div>

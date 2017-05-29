@@ -1,0 +1,122 @@
+<div class="container">
+  <div class="card">
+    <nav class="dark-primary-color ">
+      <div class="nav-wrapper">
+        <div class="divider"></div>
+        <ul class="left">
+          <li><a [routerLink]="['../dmoutrepo']" pTooltip="ย้อนกลับ" tooltipPosition="top"><i class="material-icons left">skip_previous</i> ย้อนกลับ</a></li>
+        </ul>
+      </div>
+    </nav>
+    <p-dataTable [value]="models" [responsive]="true" [rows]="20" [paginator]="true" [pageLinks]="3" [rowsPerPageOptions]="[20,40,60,80,100]" [responsive]="true" sortField="catname" rowGroupMode="subheader" groupField="catname" [globalFilter]="gb">
+      <p-header><span class="secondary-text-color">เลือกรายการวัสดุเบิกจ่าย</span>
+        <div class="row">
+          <div class="input-field col s12">
+            <i class="material-icons prefix">search</i>
+            <input id="icon_prefix" type="text" #gb>
+            <label for="icon_prefix">ค้นหาข้อมูล</label>
+          </div>
+        </div>
+      </p-header>
+      <ng-template pTemplate="rowgroupheader" let-rowData><i class="ace-icon fa fa-calendar"></i> หมวดหมุ่ : {{rowData['catname']}}</ng-template>
+      <p-column header="ลำดับ" [sortable]="true" [style]="{'width':'60px','text-align':'center'}">
+        <ng-template let-col let-rowData="rowData" let-rowIndex="rowIndex" pTemplate="body">
+          {{rowIndex+1}}
+        </ng-template>
+      </p-column>
+      <p-column field="mcode" header="รหัส" [sortable]="true" [filter]="true"></p-column>
+      <p-column field="mname" header="ชื่อวัสดุ" [sortable]="true" [filter]="true"></p-column>
+      <p-column field="munit" header="หน่วยนับ" [sortable]="true" [filter]="true"></p-column>
+      <p-column field="numnow" header="จำนวนคงคลัง" [sortable]="true" [filter]="true"></p-column>
+      <p-column styleClass="col-button" header="เพิ่มข้อมูล" [style]="{'text-align':'center'}">
+        <ng-template let-car="rowData" let-rowIndex="rowIndex" pTemplate="body">
+          <a class="btn-floating btn-small blue" href="#modal1" pTooltip="เพิ่มข้อมูล" tooltipPosition="top" (click)="edit(car)"> <i class="material-icons">add</i></a>
+        </ng-template>
+      </p-column>
+    </p-dataTable>
+
+  </div>
+</div>
+
+
+
+
+<!-- Modal Structure -->
+<div id="modal1" class="modal">
+  <div class="modal-content">
+    <p-panel header="แก้ไขข้อมูล" [toggleable]="true">
+      <form (ngSubmit)="save();">
+        <div class="row">
+          <div class="col s3">
+            <label> Lot ID</label>
+            <select class="browser-default" [(ngModel)]="model.lotnumber" name="lotnumber" id="lotnumber" (change)="getoutin($event)">
+                                <option [value]="0" disabled selected>ตัวเลือก</option>
+                                <option *ngFor="let item of models3;let i=index" [value]="item.lotid">{{i+1}} - {{item.numstockin}} {{"("+munit+")"}}</option>
+                            </select>
+          </div>
+          <div class="col s4">
+            <label> รหัสวัสดุ</label>
+            <input class="browser-default" [(ngModel)]="model.mcode" name="mcode" id="mcode" type="text" disabled>
+          </div>
+          <div class="col s5">
+            <label> ชื่อวัสดุ</label>
+            <input [(ngModel)]="model.mname" name="mname" id="mname" type="text" disabled>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col s6">
+            <label> วันที่เบิกจ่าย</label>
+            <input [(ngModel)]="model.datestockout" name="datestockout" id="datestockout" type="date" disabled>
+          </div>
+          <div class="col s6">
+            <label> ผู้เบิก</label>
+            <select class="browser-default" [(ngModel)]="model.receiver" name="receiver" id="receiver">
+                                <option [value]="0" disabled selected>ตัวเลือก</option>
+                                <option *ngFor="let item of models1" [value]="item.rcid">{{item.rcname}} - {{item.supname}}</option>
+                            </select>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col s2">
+            <label> คงเหลือ</label>
+            <input [(ngModel)]="model.numstockin" id="numstockin" name="numstockin" type="number"  disabled>
+          </div>
+          <div class="col s4">
+            <label> จำนวนเบิกจ่าย * <span class="badge yellow" (click)="getmn()" pTooltip="คลิกเบิกทั้งหมด" tooltipPosition="top">เบิกทั้งหมด</span></label>
+            <input [(ngModel)]="model.numstockout" id="numstockout" name="numstockout" type="number" (change)="doCheckNum()">
+          </div>
+          <div class="col s3">
+            <label> ราคาต่อหน่วย</label>
+            <input [(ngModel)]="model.pricen" name="pricen" id="pricen" type="number" step="0.01" type="number" disabled>
+          </div>
+          <div class="col s3">
+            <label> มูลคาเบิกจ่าย</label>
+            <input [(ngModel)]="model.priceout" name="priceout" id="priceout" type="number" step="0.01" disabled>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col s6">
+            <label> เดือนปีหมดอายุ(เช่น 201806)</label>
+            <input [(ngModel)]="model.expire" name="expire" type="number" id="expire" placeholder="YYYYMM" maxlength="6" disabled>
+          </div>
+          <div class="col s6">
+            <label> หมายเหตุ</label>
+            <input [(ngModel)]="model.notelot" id="notelot" name="notelot" placeholder="หมายเหตุ" type="text" disabled>
+          </div>
+        </div>
+        <div class="row">
+          <a class="btn-floating btn-small red right" pTooltip="ปิดหน้าต่าง" tooltipPosition="top" (click)="doCancel()">
+      <i class="small material-icons">cancel</i>
+    </a>
+
+          <button style="margin-right:5px" type="submit" pTooltip="บันทึก" tooltipPosition="top" class="btn-floating btn-small blue right">
+      <i class="small material-icons">check</i>
+    </button>
+        </div>
+      </form>
+    </p-panel>
+  </div>
+  <div class="modal-footer">
+
+  </div>
+</div>

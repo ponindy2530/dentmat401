@@ -1,0 +1,8 @@
+  <div class="row">
+    <div class="col s12 m6 l4" *ngFor="let item of models1;let i=index">
+      <div class="collection">
+        <a href="javascript:void(0)" (click)="getcat(item)" class="collection-item" pTooltip="{{item.catname}} มีรายการวัสดุจำนวน {{item.a}} รายการ / มีรายการรับเข้า {{item.b}} รายการ"
+          tooltipPosition="top"><span class="badge">{{item.a}} / {{item.b}}</span>{{i+1}} - {{item.catname}}</a>
+      </div>
+    </div>
+  </div>

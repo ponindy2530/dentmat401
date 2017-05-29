@@ -1,0 +1,115 @@
+<div class="container">
+  <div class="card">
+    <nav class="dark-primary-color ">
+      <div class="nav-wrapper">
+        <div class="divider"></div>
+        <ul class="left">
+          <li><a [routerLink]="['../dminrepo']"><i class="material-icons left">skip_previous</i> ย้อนกลับ</a></li>
+          <li><a [routerLink]="['../dminsearch']"><i class="material-icons left">search</i> ค้นหา</a></li>
+          <li><a [routerLink]="['../dminlist']"><i class="material-icons left">list</i> เลือกชื่อบริษัท</a></li>
+          <li><a [routerLink]="['../dminrepo']"><i class="material-icons left">view_module</i> ทั้งหมด</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="row">
+      <div class="input-field col s12 search">
+        <i class="material-icons prefix">search</i>
+        <input id="icon_prefix" type="text" (keyup)="getsc($event)">
+        <label for="icon_prefix">ค้นหาข้อมูล</label>
+      </div>
+    </div>
+
+    <div class="collection">
+      <a href="#modal1" *ngFor="let item of models5;let i=index" class="collection-item" pTooltip="เพิ่มข้อมูล : {{item.mname}} คลิก"
+        tooltipPosition="top" (click)="edit(item)"><span class="badge">{{item.numnow}} {{item.munit}}</span>{{i+1}} - {{item.mcode}} | {{item.mname}} | {{item.catname}}</a>
+    </div>
+
+  </div>
+</div>
+
+
+
+<!-- Modal Structure -->
+<div id="modal1" class="modal">
+  <div class="modal-content">
+    <p-panel header="เพิ่มข้อมูล" [toggleable]="true">
+      <form (ngSubmit)="save();">
+        <div class="row">
+          <div class="col s2">
+            <label class="pbz">รหัส</label>
+            <input class="pbz" [(ngModel)]="model.mid" name="mid" id="mid" type="text" disabled>
+          </div>
+          <div class="col s5">
+            <label class="pbz"> รหัสวัสดุ</label>
+            <input class="pbz" [(ngModel)]="model.mcode" name="mcode" id="mcode" type="text" disabled>
+          </div>
+          <div class="col s5">
+            <label class="pbz"> ชื่อวัสดุ</label>
+            <input class="pbz" [(ngModel)]="model.mname" name="mname" id="mname" type="text" disabled>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col s6">
+            <label class="pbz1"> วันที่รับเข้า ***</label>
+            <input class="pbz2" [(ngModel)]="model.datestockin" name="datestockin" id="datestockin" type="date">
+          </div>
+          <div class="col s6">
+            <label class="pbz1"> บริษัท ***</label>
+            <select class="pbz2" class="browser-default pbz1" [(ngModel)]="model.supid" name="supid" id="supid">
+                                <option [value]="0">ตัวเลือก</option>
+                                <option *ngFor="let item of models1" [value]="item.supid">{{item.supid}} - {{item.supname}}</option>
+                            </select>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col s4">
+            <label class="pbz1"> จำนวนรับเข้า *** {{"("+munit+")"}}</label>
+            <input class="pbz2" [(ngModel)]="model.numstockin" id="numstockin" name="numstockin" type="number" (change)="doCalPricelot()">
+          </div>
+          <div class="col s4">
+            <label class="pbz1"> ราคาต่อหน่วย ***</label>
+            <input class="pbz2" [(ngModel)]="model.pricen" name="pricen" id="pricen" type="number" step="0.01" type="number" (change)="doCalPricelot()">
+          </div>
+          <div class="col s4">
+            <label class="pbz1"> มูลคารับเข้า ***</label>
+            <input class="pbz2" [(ngModel)]="model.pricelot" name="pricelot" id="pricelot" type="number" step="0.01" (change)="doCalPricen()">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col s6">
+            <label class="pbz2"> เดือนปีหมดอายุ(เช่น 201806)</label>
+            <input class="pbz2" [(ngModel)]="model.expire" name="expire" type="number" id="expire" placeholder="YYYYMM" maxlength="6"
+              (keyup)="getexp($event)">
+          </div>
+          <div class="col s6">
+            <label class="pbz2"> หมายเหตุ</label>
+            <input class="pbz2" [(ngModel)]="model.notelot" id="notelot" name="notelot" placeholder="หมายเหตุ" type="text">
+          </div>
+        </div>
+        <div class="row">
+          <a class="btn-floating btn-small red right" pTooltip="ปิดหน้าต่าง" tooltipPosition="top" (click)="doCancel()">
+      <i class="small material-icons">cancel</i>
+    </a>
+
+          <button style="margin-right:5px" type="submit" pTooltip="บันทึก" tooltipPosition="top" class="btn-floating btn-small blue right">
+      <i class="small material-icons">check</i>
+    </button>
+        </div>
+      </form>
+    </p-panel>
+  </div>
+  <div class="modal-footer">
+
+  </div>
+</div>
+
+<!--<div class="row">
+  <div class="col s12 m5">
+    <div class="card">
+      <div class="card-content">
+        <app-dm-calculator></app-dm-calculator>
+      </div>
+    </div>
+  </div>
+</div>-->

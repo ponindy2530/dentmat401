@@ -16,18 +16,36 @@ import {
     SplitButtonModule,
     ButtonModule,
     AutoCompleteModule,
-    ChartModule,
     AccordionModule
 } from 'primeng/primeng';
+import {
+    MdCardModule,
+    MdButtonModule,
+    MdCheckboxModule,
+    MaterialModule,
+    MdNativeDateModule
+} from '@angular/material';
+
 import { CookieService } from 'angular2-cookie/services/cookies.service';
 import { SoraBaseComponent } from './sora-base/sora-base.component';
+import { ChartModule } from 'angular2-highcharts';
+import { HighchartsStatic } from 'angular2-highcharts/dist/HighchartsService';
+import * as highcharts from 'highcharts';
+
+import 'hammerjs';
 
 
 
 
 @NgModule({
     imports: [
-        CommonModule
+        CommonModule,
+        MdCardModule,
+        MdButtonModule,
+        MdCheckboxModule,
+        MaterialModule,
+        MdNativeDateModule,
+        ChartModule
     ],
     declarations: [SoraBaseComponent],
     exports: [
@@ -44,7 +62,7 @@ import { SoraBaseComponent } from './sora-base/sora-base.component';
         AutoCompleteModule,
         ChartModule,
         AccordionModule
-        
+
     ]
 })
 
@@ -55,7 +73,8 @@ export class SoraSharedModule {
             ngModule: SoraSharedModule,
             providers: [
                 CookieService,
-                SoraService
+                SoraService,
+                { provide: HighchartsStatic, useValue: highcharts }
             ]
         };
     }

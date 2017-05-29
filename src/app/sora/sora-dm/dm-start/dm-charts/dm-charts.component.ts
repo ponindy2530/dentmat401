@@ -9,12 +9,11 @@ import { Component, OnInit } from '@angular/core';
 export class DmChartsComponent extends SoraBaseComponent implements OnInit {
   data: any;
   data1: any;
-
+  options: object;
   ngOnInit() {
     this.datestart = "2016-10-01";
     this.dateend = "2017-09-30";
     this.hcode = "10702";
-
 
 
     this._SoraService.apiData3(31, this.hcode, this.datestart, this.dateend)
@@ -27,13 +26,13 @@ export class DmChartsComponent extends SoraBaseComponent implements OnInit {
         let data = [];
 
         chartData.forEach(v => {
-          labels.push(v.mname);
-          data.push(+v.pricenow);
+          labels.push({ name: v.mname, y: +v.pricenow });
+          data.push({ name: v.mname, y: +v.pricenow });
         });
 
-        // console.log(labels);
-        // console.log(data);
-        this.barCharts(labels, data);
+        console.log(labels);
+        console.log(data);
+        this.barCharts(data);
 
 
       });
@@ -48,7 +47,7 @@ export class DmChartsComponent extends SoraBaseComponent implements OnInit {
         let data1 = [];
 
         chartData1.forEach(v => {
-          data1.push(+v.a);
+          data1.push({ name: v.rctname, y: +v.a });
         });
 
         console.log(data1);
@@ -67,36 +66,94 @@ export class DmChartsComponent extends SoraBaseComponent implements OnInit {
 
   }
 
-  barCharts(labels: any, data: any) {
-    this.data = {
-      labels: labels,
-      datasets: [
-        {
-          label: 'มูลค่าสินค้ามากที่สุด 10 ตัว',
-          backgroundColor: '#42A5F5',
-          borderColor: '#1E88E5',
-          data: data
+  barCharts(data: any) {
+    // this.data = {
+    //   labels: labels,
+    //   datasets: [
+    //     {
+    //       label: 'มูลค่าสินค้ามากที่สุด 10 ตัว',
+    //       backgroundColor: '#42A5F5',
+    //       borderColor: '#1E88E5',
+    //       data: data
+    //     }
+    //   ]
+    // }
+
+
+    this.options = {
+      chart: {
+        type: 'column'
+      },
+      title: {
+        text: 'มูลค่าสินค้ามากที่สุด 10 ตัว. ปีงบประมาณ, 2559 ถึงปี, 2560'
+      },
+      xAxis: {
+        type: 'category'
+      },
+      yAxis: {
+        title: {
+          text: 'มูลค่า'
         }
-      ]
-    }
+
+      },
+      legend: {
+        enabled: false
+      },
+      plotOptions: {
+        series: {
+          dataLabels: {
+            enabled: true,
+            format: '{point.y:.1f} บาท'
+          }
+        }
+      },
+
+      tooltip: {
+        headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+        pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.2f}%</b> of total<br/>'
+      },
+
+      series: [{
+        name: 'Brands',
+        colorByPoint: true,
+        data: data
+      }],
+    };
+
+
   }
 
 
-  pieCharts(data1:any) {
+  pieCharts(data1: any) {
     this.data1 = {
-      labels: ['การเบิกใช้วัสดุภายใน รพ.', 'การเบิกใช้วัสดุนอก รพ.สต'],
-      datasets: [
-        {
-          data: data1,
-          backgroundColor: [
-            "#FF6384",
-            "#36A2EB"
-          ],
-          hoverBackgroundColor: [
-            "#FF6384",
-            "#36A2EB"
-          ]
-        }]
+
+      chart: {
+        plotBackgroundColor: null,
+        plotBorderWidth: null,
+        plotShadow: false,
+        type: 'pie'
+      },
+      title: {
+        text: 'การเบิกใช้วัสดุ ในรพ. กับ รพสต. ปีงบประมาณ, 2559 ถึงปี, 2560'
+      },
+      tooltip: {
+        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+      },
+      plotOptions: {
+        pie: {
+          allowPointSelect: true,
+          cursor: 'pointer',
+          dataLabels: {
+            enabled: false
+          },
+          showInLegend: true
+        }
+      },
+      series: [{
+        name: 'Brands',
+        colorByPoint: true,
+        data: data1
+      }]
     };
   }
 
@@ -108,5 +165,9 @@ export class DmChartsComponent extends SoraBaseComponent implements OnInit {
     console.log(event.dataset);
 
   }
+
+
+
+
 
 }

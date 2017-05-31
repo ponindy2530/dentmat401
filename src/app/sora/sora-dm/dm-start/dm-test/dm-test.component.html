@@ -1,25 +1,29 @@
-<!--<div class="collection">
-  <a  href="#modal1" *ngFor="let item of models;let i=index" (click)="getadd(item)" class="collection-item">{{i+1}} - {{item.mcode}} | {{item.mname}} </a>
-</div>-->
-
-
-
-
-<!-- Modal Structure -->
-<!--<div id="modal1" class="modal">
-  <div class="modal-content">
-    <app-dmmain-add *ngIf="dataform" [dataadd]="dataadd"></app-dmmain-add>
+<div class="row">
+  <div class="col s12 m12 l6">
+    <div class="card">
+      <div class="card-action">
+        <a href="#">การเบิกใช้วัสดุ ในรพ. กับ รพสต</a>
+      </div>
+      <div class="card-content">
+        <app-c-charts-pie [apiKey]="apiKeypie"></app-c-charts-pie>
+      </div>
+    </div>
   </div>
-  <div class="modal-footer">
-    <a href="javascript:void(0)" (click)="stop()" class="modal-action modal-close waves-effect waves-green btn-flat">ปิด</a>
+  <div class="col s12 m12 l6">
+    <div class="card">
+      <div class="card-action">
+        <a href="#">มูลค่าสินค้ามากที่สุด Top 10</a>
+      </div>
+      <div class="card-content">
+        <app-c-charts-top10 [apiKey]="apiKeytop10"></app-c-charts-top10>
+      </div>
+    </div>
   </div>
-</div>-->
-
-<app-dm-charts></app-dm-charts>
+</div>
 
 
 <div class="row">
-  <div class="col s12 m6 l6">
+  <div class="col s12 m12 l6">
     <div class="card">
       <div class="card-action">
         <a href="#">รายไตรมาส</a>
@@ -29,7 +33,7 @@
       </div>
     </div>
   </div>
-  <div class="col s12 m6 l6">
+  <div class="col s12 m12 l6">
     <div class="card">
       <div class="card-action">
         <a href="#">รายเดือน</a>

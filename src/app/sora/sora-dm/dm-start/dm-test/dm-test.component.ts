@@ -11,7 +11,8 @@ export class DmTestComponent extends SoraBaseComponent implements OnInit {
 
   apiKey1: number = 41;
   apiKey2: number = 42;
-
+  apiKeytop10: number = 31;
+  apiKeypie: number = 39;
 
   ngOnInit() {
 

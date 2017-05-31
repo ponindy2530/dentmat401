@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DmChartsComponent } from './dm-charts.component';
+import { CChartsPieComponent } from './c-charts-pie.component';
 
-describe('DmChartsComponent', () => {
-  let component: DmChartsComponent;
-  let fixture: ComponentFixture<DmChartsComponent>;
+describe('CChartsPieComponent', () => {
+  let component: CChartsPieComponent;
+  let fixture: ComponentFixture<CChartsPieComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DmChartsComponent ]
+      declarations: [ CChartsPieComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DmChartsComponent);
+    fixture = TestBed.createComponent(CChartsPieComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

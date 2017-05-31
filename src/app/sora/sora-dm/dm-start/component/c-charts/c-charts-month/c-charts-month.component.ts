@@ -6,9 +6,9 @@ SoraBaseComponent
   templateUrl: './c-charts-month.component.html',
   styleUrls: ['./c-charts-month.component.css']
 })
-export class CChartsMonthComponent extends SoraBaseComponent implements OnInit,OnChanges {
+export class CChartsMonthComponent extends SoraBaseComponent implements OnInit, OnChanges {
 
-  @Input() apiKey:string;
+  @Input() apiKey: number;
 
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -57,6 +57,9 @@ export class CChartsMonthComponent extends SoraBaseComponent implements OnInit,O
   options: object;
   openCharts(categories, _dataA, _dataB) {
     this.options = {
+      credits: {
+        enabled: false
+      },
       chart: {
         type: 'column'
       },

@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { CChartsMonthComponent } from './c-charts/c-charts-month/c-charts-month.component';
 import { CChartsTop10Component } from './c-charts/c-charts-top10/c-charts-top10.component';
+import { CChartsPieComponent } from './c-charts/c-charts-pie/c-charts-pie.component';
 
 
 @NgModule({
@@ -12,11 +13,13 @@ import { CChartsTop10Component } from './c-charts/c-charts-top10/c-charts-top10.
     ],
     declarations: [
         CChartsMonthComponent,
-        CChartsTop10Component
+        CChartsTop10Component,
+        CChartsPieComponent
     ],
     exports: [
         CChartsMonthComponent,
-        CChartsTop10Component
+        CChartsTop10Component,
+        CChartsPieComponent
     ]
 })
 export class ComponentModule { } 

@@ -24,7 +24,6 @@ import { DmhomeDashboardComponent } from './dmhome/dmhome-dashboard/dmhome-dashb
 import { DmhomeCompListcatComponent } from './dmhome/componnent/dmhome-comp-listcat/dmhome-comp-listcat.component';
 import { DmmainAddComponent } from './dmmain/dmmain-add/dmmain-add.component';
 import { DmhomeCompListsupComponent } from './dmhome/componnent/dmhome-comp-listsup/dmhome-comp-listsup.component';
-import { DmChartsComponent } from './dm-charts/dm-charts.component';
 import { DmTestComponent } from './dm-test/dm-test.component';
 
 const routes: Routes = [
@@ -84,7 +83,6 @@ const routes: Routes = [
         DmhomeCompListcatComponent,
         DmmainAddComponent,
         DmhomeCompListsupComponent,
-        DmChartsComponent,
         DmTestComponent
     ]
 })

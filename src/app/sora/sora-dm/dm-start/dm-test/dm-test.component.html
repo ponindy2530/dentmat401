@@ -1,0 +1,42 @@
+<!--<div class="collection">
+  <a  href="#modal1" *ngFor="let item of models;let i=index" (click)="getadd(item)" class="collection-item">{{i+1}} - {{item.mcode}} | {{item.mname}} </a>
+</div>-->
+
+
+
+
+<!-- Modal Structure -->
+<!--<div id="modal1" class="modal">
+  <div class="modal-content">
+    <app-dmmain-add *ngIf="dataform" [dataadd]="dataadd"></app-dmmain-add>
+  </div>
+  <div class="modal-footer">
+    <a href="javascript:void(0)" (click)="stop()" class="modal-action modal-close waves-effect waves-green btn-flat">ปิด</a>
+  </div>
+</div>-->
+
+<app-dm-charts></app-dm-charts>
+
+
+<div class="row">
+  <div class="col s12 m6 l6">
+    <div class="card">
+      <div class="card-action">
+        <a href="#">รายไตรมาส</a>
+      </div>
+      <div class="card-content">
+        <app-c-charts-month [apiKey]="apiKey2"></app-c-charts-month>
+      </div>
+    </div>
+  </div>
+  <div class="col s12 m6 l6">
+    <div class="card">
+      <div class="card-action">
+        <a href="#">รายเดือน</a>
+      </div>
+      <div class="card-content">
+        <app-c-charts-month [apiKey]="apiKey1"></app-c-charts-month>
+      </div>
+    </div>
+  </div>
+</div>

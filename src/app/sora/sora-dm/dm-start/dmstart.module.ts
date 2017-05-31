@@ -1,3 +1,4 @@
+import { ComponentModule } from './component/component.module';
 import { SumsPipe, SumsPipe2 } from './../../sora-shared/pipe/sums.pipe';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
@@ -24,6 +25,7 @@ import { DmhomeCompListcatComponent } from './dmhome/componnent/dmhome-comp-list
 import { DmmainAddComponent } from './dmmain/dmmain-add/dmmain-add.component';
 import { DmhomeCompListsupComponent } from './dmhome/componnent/dmhome-comp-listsup/dmhome-comp-listsup.component';
 import { DmChartsComponent } from './dm-charts/dm-charts.component';
+import { DmTestComponent } from './dm-test/dm-test.component';
 
 const routes: Routes = [
     {
@@ -45,7 +47,7 @@ const routes: Routes = [
             { path: 'dmhomerepostock', component: DmhomeRepostockComponent },
             { path: 'dmhomedashboard', component: DmhomeDashboardComponent },
             { path: 'dmmainadd', component: DmmainAddComponent },
-            { path: 'dmcharts', component: DmChartsComponent }
+            { path: 'dmtest', component: DmTestComponent }
         ]
     },
     { path: '', redirectTo: 'appstart', pathMatch: 'full' },
@@ -56,6 +58,7 @@ const routes: Routes = [
     imports: [
         CommonModule,
         SoraSharedModule,
+        ComponentModule,
         RouterModule.forChild(routes)
     ],
     declarations: [
@@ -81,7 +84,8 @@ const routes: Routes = [
         DmhomeCompListcatComponent,
         DmmainAddComponent,
         DmhomeCompListsupComponent,
-        DmChartsComponent
+        DmChartsComponent,
+        DmTestComponent
     ]
 })
 export class DmStartModule { } 

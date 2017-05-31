@@ -1,6 +1,6 @@
 import { MainproductDt } from './../../../../sora-shared/sora-model';
 import { SoraBaseComponent } from './../../../../sora-shared/sora-base/sora-base.component';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import swal from 'sweetalert2';
 declare var jQuery: any;
 import * as _ from "lodash";
@@ -10,6 +10,25 @@ import * as _ from "lodash";
   styleUrls: ['./dmmain-add.component.css']
 })
 export class DmmainAddComponent extends SoraBaseComponent implements OnInit {
+
+
+
+
+  // @Input() dataadd: MainproductDt;
+
+  // shallow = new MainproductDt();
+  // ngOnChanges() {
+  //   this.model = this.dataadd;
+  //   this.shallow = _.clone(this.dataadd);
+
+
+
+  // }
+
+
+
+
+
 
   model = new MainproductDt();
 
@@ -76,6 +95,22 @@ export class DmmainAddComponent extends SoraBaseComponent implements OnInit {
   }
 
   save() {
+    // console.log(this.model);
+    // console.log(this.shallow);
+
+
+    // console.log(_.isEqual(this.model, this.shallow));
+
+
+    // if (_.isEqual(this.model, this.shallow) == true) {
+    //   swal('ค่าเดิมไม่บันทึก');
+    // } else {
+    //   swal('ค่าใหม่บันทึก');
+    // }
+
+
+
+
     if (this.updateId < 1) {
       if (_.find(this.models2, ['mname', this.model.mname]) && _.find(this.models2, ['mcode', this.model.mcode])) {
         swal(

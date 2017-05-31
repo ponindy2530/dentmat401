@@ -61,7 +61,12 @@ import 'hammerjs';
         ButtonModule,
         AutoCompleteModule,
         ChartModule,
-        AccordionModule
+        AccordionModule,
+        MdCardModule,
+        MdButtonModule,
+        MdCheckboxModule,
+        MaterialModule,
+        MdNativeDateModule
 
     ]
 })

@@ -90,7 +90,7 @@ export class CChartsTop10Component extends SoraBaseComponent implements OnInit, 
       }],
     };
 
-
+    this.loading = false;
   }
 
 

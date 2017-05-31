@@ -92,6 +92,8 @@ export class CChartsMonthComponent extends SoraBaseComponent implements OnInit, 
       },
       series: [_dataA, _dataB]
     }
+
+    this.loading = false;
   }
 
 }

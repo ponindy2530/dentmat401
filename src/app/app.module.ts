@@ -1,3 +1,5 @@
+import { ProcureModule } from './psc/psc_procure/procure.module';
+import { PscShareModule } from './psc/psc_shared/psc_shared.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
@@ -21,7 +23,9 @@ const routes: Routes = [
     BrowserModule,
     BrowserAnimationsModule,
     RouterModule.forRoot(routes),
-    SoraDmModule
+    SoraDmModule,
+    ProcureModule,
+    PscShareModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -14,6 +14,10 @@ export class DmTestComponent extends SoraBaseComponent implements OnInit {
   apiKeytop10: number = 31;
   apiKeypie: number = 39;
 
+  apikeyCat:number = 34;
+
+  apikeyListOut:number = 43;
+
   ngOnInit() {
 
     this.datestart = "2016-10-01";

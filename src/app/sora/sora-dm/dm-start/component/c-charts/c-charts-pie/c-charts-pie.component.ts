@@ -79,5 +79,6 @@ export class CChartsPieComponent extends SoraBaseComponent implements OnInit, On
         data: data
       }]
     };
+        this.loading = false;
   }
 }

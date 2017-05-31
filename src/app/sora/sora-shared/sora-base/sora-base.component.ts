@@ -30,14 +30,16 @@ export class SoraBaseComponent implements OnInit {
   fmodels3: any = [];
   fmodels4: any = [];
   fmodels5: any = [];
-  datestart: string;
-  dateend: string;
-  hcode: string;
+  datestart: string = "2016-10-01";
+  dateend: string = "2017-09-30";
+  hcode: string = "10702";
   display: boolean = false;
   updateId: number;
   pd: any;
-  addmodel:any = [];
+  addmodel: any = [];
   del: any;
+
+  loading: boolean = true;
   ngOnInit() {
   }
 

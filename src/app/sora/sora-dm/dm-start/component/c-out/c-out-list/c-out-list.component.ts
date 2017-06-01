@@ -1,5 +1,5 @@
 import { SoraBaseComponent } from './../../../../../sora-shared/sora-base/sora-base.component';
-import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-c-out-list',
@@ -21,8 +21,15 @@ export class COutListComponent extends SoraBaseComponent implements OnChanges {
       .subscribe(res => this.models = res,
       err => console.log(err)
       , () => {
-        console.log(this.models);
+        // console.log(this.models);
       });
+
+  }
+
+  @Output() getList = new EventEmitter();
+
+  edit(ev: any) {
+    this.getList.emit(ev);
   }
 
 }

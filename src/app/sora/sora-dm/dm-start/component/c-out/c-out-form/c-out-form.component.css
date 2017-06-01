@@ -1,0 +1,9 @@
+.pbz{
+    font-weight: bold;
+    font-size: 1em;
+    color: black;
+}
+
+input[disabled] {
+    color: black;
+}

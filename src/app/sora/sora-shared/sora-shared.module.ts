@@ -1,3 +1,5 @@
+import { SumsPipe, SumsPipe2 } from './pipe/sums.pipe';
+import { ServiceMainService } from './p-service/service-main.service';
 import { SoraService } from './sora-server';
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -23,7 +25,10 @@ import {
     MdButtonModule,
     MdCheckboxModule,
     MaterialModule,
-    MdNativeDateModule
+    MdNativeDateModule,
+    MdToolbarModule,
+    MdAutocompleteModule,
+    MdChipsModule
 } from '@angular/material';
 
 import { CookieService } from 'angular2-cookie/services/cookies.service';
@@ -47,7 +52,11 @@ import 'hammerjs';
         MdNativeDateModule,
         ChartModule
     ],
-    declarations: [SoraBaseComponent],
+    declarations: [
+        SoraBaseComponent,
+        SumsPipe2,
+        SumsPipe
+        ],
     exports: [
         HttpModule,
         FormsModule,
@@ -66,7 +75,12 @@ import 'hammerjs';
         MdButtonModule,
         MdCheckboxModule,
         MaterialModule,
-        MdNativeDateModule
+        MdNativeDateModule,
+        MdToolbarModule,
+        MdAutocompleteModule,
+        SumsPipe2,
+        SumsPipe,
+        MdChipsModule
 
     ]
 })
@@ -79,6 +93,7 @@ export class SoraSharedModule {
             providers: [
                 CookieService,
                 SoraService,
+                ServiceMainService,
                 { provide: HighchartsStatic, useValue: highcharts }
             ]
         };

@@ -10,16 +10,21 @@ declare var jQuery: any;
   styleUrls: ['./dmout-add.component.css']
 })
 export class DmoutAddComponent extends SoraBaseComponent implements OnInit {
-
-
-
+  apikeyListOut: number = 43;
+  apikeyCat: number = 34;
+  apikeyListup: number = 46;
+  openform: boolean = false;
+  openpage: boolean = false;
+  openlist: boolean = true;
   ngOnInit() {
+    jQuery('.collapsible').collapsible();
     this.datestart = "2016-10-01";
     this.dateend = "2017-09-30";
     this.hcode = "10702";
     this.updateId = 0;
     this.model.lotnumber = 0;
     this.model.receiver = 0;
+    this.model.datestockout = this._SoraService.datenows();
     this.api1(13, this.hcode);
     this.api(10, this.hcode, this.datestart, this.dateend);
   }
@@ -145,5 +150,42 @@ export class DmoutAddComponent extends SoraBaseComponent implements OnInit {
         this._Router.navigate(["dmstart/dmoutrepo"]);
       }
       );
+  }
+
+  fromlistData: Mainstockout;
+  listData(ev: any) {
+    this.fromlistData = ev;
+    this.opedit();
+  }
+
+
+  //กดปุ่มเบิก
+  opedit() {
+    this.openform = true;
+    this.openpage = false;
+    this.openlist = false;
+  }
+
+  //กดปุ่มยกเลิก
+  opCancel() {
+    this.openform = false;
+    this.openpage = false;
+    this.openlist = true;
+  }
+
+  //กดปุ่มบันทึก
+  opsave() {
+    this.openform = false;
+    this.openpage = true;
+    this.openlist = false;
+  }
+
+  okCancel(ev: boolean) {
+
+    if (ev == true) {
+      this.opCancel();
+    } else {
+      this.opsave();
+    }
   }
 }

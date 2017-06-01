@@ -1,5 +1,4 @@
 import { ComponentModule } from './component/component.module';
-import { SumsPipe, SumsPipe2 } from './../../sora-shared/pipe/sums.pipe';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { SoraSharedModule } from './../../sora-shared/sora-shared.module';
@@ -25,28 +24,19 @@ import { DmhomeCompListcatComponent } from './dmhome/componnent/dmhome-comp-list
 import { DmmainAddComponent } from './dmmain/dmmain-add/dmmain-add.component';
 import { DmhomeCompListsupComponent } from './dmhome/componnent/dmhome-comp-listsup/dmhome-comp-listsup.component';
 import { DmTestComponent } from './dm-test/dm-test.component';
+import { VDashboardComponent } from './p-view/v-dashboard/v-dashboard.component';
+import { VMainComponent } from './p-view/v-main/v-main.component';
+import { VInComponent } from './p-view/v-in/v-in.component';
+import { VOutComponent } from './p-view/v-out/v-out.component';
 
 const routes: Routes = [
     {
         path: 'dmstart', component: DmStartComponent,
         children: [
-            { path: 'dminrepo', component: DminRepoComponent },
-            { path: 'dminadd', component: DminAddComponent },
-            { path: 'dmoutrepo', component: DmoutRepoComponent },
-            { path: 'dmoutadd', component: DmoutAddComponent },
-            { path: 'dmmainrepo/:id', component: DmmainRepoComponent },
-            { path: 'dmsetuser', component: DmsetUserComponent },
-            { path: 'dmmainlistcat', component: DmmainListcatComponent },
-            { path: 'dmmainsearch', component: DmmainSearchComponent },
-            { path: 'dminlist', component: DminListComponent },
-            { path: 'dminsearch', component: DminSearchComponent },
-            { path: 'dminlistadd/:id', component: DminListaddComponent },
-            { path: 'dmhomerepo', component: DmhomeRepoComponent },
-            { path: 'dmhomerepo10', component: DmhomeRepo10Component },
-            { path: 'dmhomerepostock', component: DmhomeRepostockComponent },
-            { path: 'dmhomedashboard', component: DmhomeDashboardComponent },
-            { path: 'dmmainadd', component: DmmainAddComponent },
-            { path: 'dmtest', component: DmTestComponent }
+            { path: 'dashboard', component: VDashboardComponent },
+            { path: 'main', component: VMainComponent },
+            { path: 'in', component: VInComponent },
+            { path: 'out', component: VOutComponent }
         ]
     },
     { path: '', redirectTo: 'appstart', pathMatch: 'full' },
@@ -70,8 +60,6 @@ const routes: Routes = [
         DmsetUserComponent,
         DmmainListcatComponent,
         DmmainSearchComponent,
-        SumsPipe,
-        SumsPipe2,
         DminListComponent,
         DminSearchComponent,
         DminListaddComponent,
@@ -83,7 +71,11 @@ const routes: Routes = [
         DmhomeCompListcatComponent,
         DmmainAddComponent,
         DmhomeCompListsupComponent,
-        DmTestComponent
+        DmTestComponent,
+        VDashboardComponent,
+        VMainComponent,
+        VInComponent,
+        VOutComponent
     ]
 })
 export class DmStartModule { } 

@@ -1,7 +1,9 @@
+import { ServiceMainService } from './../p-service/service-main.service';
 import { CookieService } from 'angular2-cookie/services/cookies.service';
 import { SoraService } from './../sora-server';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+
 @Component({
   selector: 'app-sora-base',
   templateUrl: './sora-base.component.html',
@@ -13,7 +15,8 @@ export class SoraBaseComponent implements OnInit {
     public _SoraService: SoraService,
     public _CookieService: CookieService,
     public _ActivatedRoute: ActivatedRoute,
-    public _Router: Router
+    public _Router: Router,
+    public _ServiceMainService: ServiceMainService
   ) { }
 
   fmodel: any = [];

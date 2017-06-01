@@ -6,17 +6,12 @@ import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/cor
   templateUrl: './c-main-cat.component.html',
   styleUrls: ['./c-main-cat.component.css']
 })
-export class CMainCatComponent extends SoraBaseComponent implements OnInit, OnChanges {
-
-  @Input() apiKey: number;
+export class CMainCatComponent extends SoraBaseComponent implements OnInit {
 
 
-  ngOnChanges(changes: SimpleChanges): void {
-
-    let apiId = changes['apiKey'].currentValue;
-
+  ngOnInit() {
+    let apiId = 34;
     this.getData(apiId);
-
   }
 
   getData(apiId) {
@@ -24,6 +19,7 @@ export class CMainCatComponent extends SoraBaseComponent implements OnInit, OnCh
       .subscribe(res => this.models = res,
       err => console.log(err)
       , () => {
+        // console.log(this.models);
 
       });
     this.loading = false;

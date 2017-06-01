@@ -1,4 +1,4 @@
-<div class="container">
+<!--<div class="container">
   <div class="row">
     <div class="col s12 m12 l12">
       <div class="card">
@@ -55,21 +55,21 @@
 
 
 
-          <p-dataTable *ngIf="dataTable" [value]="models" [rows]="10" [paginator]="true" [pageLinks]="5" [rowsPerPageOptions]="[20,40,60,80,100]"
-            [responsive]="true" sortField="catname" rowGroupMode="subheader" groupField="catname" [globalFilter]="gb">
+          <p-dataTable *ngIf="dataTable" sortOrder="-1" [value]="models" [rows]="10" [paginator]="true" [pageLinks]="5" [rowsPerPageOptions]="[20,40,60,80,100]"
+            [responsive]="true"  sortField="catname" rowGroupMode="subheader" groupField="catname" [globalFilter]="gb">
             <ng-template pTemplate="rowgroupheader" let-rowData><i class="ace-icon fa fa-folder-open"></i> หมวดหมุ่ : {{rowData['catname']}}</ng-template>
             <p-column header="ลำดับ" [sortable]="true" [style]="{'width':'60px','text-align':'center'}">
               <ng-template let-col let-rowData="rowData" let-rowIndex="rowIndex" pTemplate="body">
                 {{rowIndex+1}}
               </ng-template>
             </p-column>
-            <p-column field="mcode" header="รหัส" [sortable]="true"></p-column>
-            <p-column field="mname" header="ชื่อวัสดุ" [sortable]="true"></p-column>
-            <p-column field="munit" header="หน่วยนับ" [sortable]="true"  [style]="{'width':'60px','text-align':'center'}"></p-column>
-            <p-column field="numstockin" header="จำนวนรับเข้า" [sortable]="true"  [style]="{'width':'60px','text-align':'center'}"></p-column>
-            <p-column field="numstockout" header="จำนวนเบิกจ่าย" [sortable]="true"  [style]="{'width':'60px','text-align':'center'}"></p-column>
-            <p-column field="numnow" header="จำนวนคงคลัง" [sortable]="true"  [style]="{'width':'60px','text-align':'center'}"></p-column>
-            <p-column field="stck" header="สถานะวัสดุ" [sortable]="true"  [style]="{'width':'110px','text-align':'center'}">
+            <p-column field="mcode" header="รหัส"></p-column>
+            <p-column field="mname" header="ชื่อวัสดุ"></p-column>
+            <p-column field="munit" header="หน่วยนับ" [style]="{'width':'60px','text-align':'center'}"></p-column>
+            <p-column field="numstockin" header="จำนวนรับเข้า"  [style]="{'width':'60px','text-align':'center'}"></p-column>
+            <p-column field="numstockout" header="จำนวนเบิกจ่าย"  [style]="{'width':'60px','text-align':'center'}"></p-column>
+            <p-column field="numnow" header="จำนวนคงคลัง"  [style]="{'width':'60px','text-align':'center'}"></p-column>
+            <p-column field="stck" header="สถานะวัสดุ"   [style]="{'width':'110px','text-align':'center'}">
               <ng-template let-car="rowData" let-rowIndex="rowIndex" pTemplate="body">
                 <span [class]="car.stckcol" pTooltip="คงเหลือขั้นต่ำ : {{car.nummin}} {{car.munit}}" tooltipPosition="top">{{car.stck}}</span>
               </ng-template>
@@ -158,13 +158,13 @@
       </div>
     </div>
   </div>
-</div>
+</div>-->
 
 
 
 
 <!-- Modal Structure -->
-<div id="modal1" class="modal">
+<!--<div id="modal1" class="modal">
   <div class="modal-content">
     <p-panel header="รายละเอียด" [toggleable]="true">
       <div class="row">
@@ -213,7 +213,7 @@
   </div>
   <div class="modal-footer">
   </div>
-</div>
+</div>-->
 
 
 
@@ -224,7 +224,7 @@
 
 
 
-<div class="container">
+<!--<div class="container">
 
 
 
@@ -242,7 +242,7 @@
       </div>
       <div>
         <div class="col s12 m6 l6">
-          <!--<app-dmhome-repo></app-dmhome-repo>-->
+   
         </div>
       </div>
     </div>
@@ -254,7 +254,7 @@
       </div>
       <div>
         <div class="col s12 m6 l6">
-          <!--<app-dmhome-repostock></app-dmhome-repostock>-->
+         
         </div>
       </div>
     </div>
@@ -262,4 +262,4 @@
 
 
 
-</div>
+</div>-->

@@ -1,19 +1,30 @@
-<p-dataTable [value]="models" sortOrder="-1" sortField="mname" rowGroupMode="subheader" groupField="mname">
-  <ng-template pTemplate="rowgroupheader" let-rowData> <h6><b>ชื่อวัสดุทันตกรรม : {{rowData['mcode']}} - {{rowData['mname']}}</b></h6></ng-template>
+<div class="row">
+  <div class="input-field col s12 search">
+    <i class="material-icons prefix">search</i>
+    <input #gb type="text">
+    <label for="icon_prefix">ค้นหาข้อมูล</label>
+  </div>
+</div>
+<p-dataTable [value]="models" sortOrder="-1" sortField="catname" rowGroupMode="subheader" groupField="catname" [rows]="20" [paginator]="true" [pageLinks]="5" [rowsPerPageOptions]="[5,10,20,30,40]" [globalFilter]="gb"
+  #dt>
+  <ng-template  pTemplate="rowgroupheader" let-rowData>
+    <h6><b>หมวดหมู่ : {{rowData['catname']}}</b></h6>
+  </ng-template>
   <p-column header="ลำดับ" [sortable]="true" [style]="{'width':'60px','text-align':'center'}">
     <ng-template let-col let-rowData="rowData" let-rowIndex="rowIndex" pTemplate="body">
       {{rowIndex+1}}
     </ng-template>
   </p-column>
   <p-column field="datestockin" header="วันที่รับเข้า" [sortable]="true" [style]="{'width':'100px','text-align':'center'}"></p-column>
-  <p-column field="catname" header="หมวดหมุ่" [sortable]="true"></p-column>
+  <p-column field="mcode" header="รหัสวัสดุ" [sortable]="true"></p-column>
+  <p-column field="mname" header="ชื่อวัสดุ" [sortable]="true"></p-column>
   <p-column field="supname" header="บริษัท" [sortable]="true" [style]="{'width':'100px','text-align':'center'}"></p-column>
   <p-column field="expire" header="วันที่หมดอายุ" [sortable]="true" [style]="{'width':'100px','text-align':'center'}"></p-column>
   <p-column field="numnow" header="จำนวนคงคลัง" [sortable]="true" [sortable]="true" [style]="{'width':'80px','text-align':'center'}"></p-column>
   <p-column field="munit" header="หน่วยนับ" [sortable]="true" [style]="{'width':'80px','text-align':'center'}"></p-column>
   <p-column styleClass="col-button" header="เลือกรายการ" [style]="{'width':'80px','text-align':'center'}">
     <ng-template let-car="rowData" let-rowIndex="rowIndex" pTemplate="body">
-      <a class="btn-floating btn-small blue" href="#modal1" pTooltip="เพิ่มข้อมูล" tooltipPosition="top" (click)="edit(car)"> <i class="material-icons">add</i></a>
+      <a class="btn-floating btn-small blue" href="javascript:void(0)" pTooltip="เบิกวัสดุ" tooltipPosition="top" (click)="edit(car)"> <i class="material-icons">add</i></a>
     </ng-template>
   </p-column>
 </p-dataTable>

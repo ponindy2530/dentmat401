@@ -1,5 +1,5 @@
-.pbz{
-    font-weight: bold;
-    font-size: 1em;
-    color: black;
+.container {
+  margin: 0 auto;
+  max-width: 1280px;
+  width: 90%;
 }

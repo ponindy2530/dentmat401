@@ -75,7 +75,7 @@ export class DmmainAddComponent extends SoraBaseComponent implements OnInit {
       .subscribe(res => this.models3 = res,
       err => console.log(err)
       , () => {
-        console.log(this.models);
+        // console.log(this.models);
       });
   }
   getmcode(ev: any) {

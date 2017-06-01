@@ -1,48 +1,79 @@
-<div class="container">
-  <div class="card">
-    <nav class="dark-primary-color ">
-      <div class="nav-wrapper">
-        <div class="divider"></div>
-        <ul class="left">
-          <li><a [routerLink]="['../dmoutrepo']" pTooltip="ย้อนกลับ" tooltipPosition="top"><i class="material-icons left">skip_previous</i> ย้อนกลับ</a></li>
-        </ul>
-      </div>
-    </nav>
-    <p-dataTable [value]="models" [responsive]="true" [rows]="20" [paginator]="true" [pageLinks]="3" [rowsPerPageOptions]="[20,40,60,80,100]" [responsive]="true" sortField="catname" rowGroupMode="subheader" groupField="catname" [globalFilter]="gb">
-      <p-header><span class="secondary-text-color">เลือกรายการวัสดุเบิกจ่าย</span>
-        <div class="row">
-          <div class="input-field col s12">
-            <i class="material-icons prefix">search</i>
-            <input id="icon_prefix" type="text" #gb>
-            <label for="icon_prefix">ค้นหาข้อมูล</label>
-          </div>
-        </div>
-      </p-header>
-      <ng-template pTemplate="rowgroupheader" let-rowData><i class="ace-icon fa fa-calendar"></i> หมวดหมุ่ : {{rowData['catname']}}</ng-template>
-      <p-column header="ลำดับ" [sortable]="true" [style]="{'width':'60px','text-align':'center'}">
-        <ng-template let-col let-rowData="rowData" let-rowIndex="rowIndex" pTemplate="body">
-          {{rowIndex+1}}
-        </ng-template>
-      </p-column>
-      <p-column field="mcode" header="รหัส" [sortable]="true" [filter]="true"></p-column>
-      <p-column field="mname" header="ชื่อวัสดุ" [sortable]="true" [filter]="true"></p-column>
-      <p-column field="munit" header="หน่วยนับ" [sortable]="true" [filter]="true"></p-column>
-      <p-column field="numnow" header="จำนวนคงคลัง" [sortable]="true" [filter]="true"></p-column>
-      <p-column styleClass="col-button" header="เพิ่มข้อมูล" [style]="{'text-align':'center'}">
-        <ng-template let-car="rowData" let-rowIndex="rowIndex" pTemplate="body">
-          <a class="btn-floating btn-small blue" href="#modal1" pTooltip="เพิ่มข้อมูล" tooltipPosition="top" (click)="edit(car)"> <i class="material-icons">add</i></a>
-        </ng-template>
-      </p-column>
-    </p-dataTable>
+<!--<div class="container">
+  <nav class="teal lighten-2">
+    <div class="nav-wrapper">
+      <div class="divider"></div>
+      <ul class="left">
+        <li><a [routerLink]="['../dmoutrepo']"><i class="material-icons left">fast_rewind</i> ย้อนกลับ</a></li>
+      </ul>
+    </div>
+  </nav>
+</div>
 
+
+
+
+<ul class="collapsible" data-collapsible="accordion">
+  <li>
+    <div class="collapsible-header"><i class="material-icons">list</i>ตัวเลือกหมวดหมู่</div>
+    <div class="collapsible-body">
+      <app-c-main-cat [apiKey]="apikeyCat"></app-c-main-cat>
+    </div>
+  </li>
+</ul>-->
+
+
+
+
+
+
+
+<div class="container">
+  <div class="row">
+    <div class="col s12 m12 l12">
+      <div class="card">
+        <div class="card-image">
+          <nav class="teal lighten-2">
+            <div class="nav-wrapper">
+              <div class="divider"></div>
+              <ul class="left">
+                <li><a [routerLink]="['../dmoutrepo']"><i class="material-icons left">fast_rewind</i> ย้อนกลับ</a></li>
+              </ul>
+            </div>
+          </nav>
+          <button *ngIf="openlist" class="btn-floating btn-large halfway-fab waves-effect waves-light  teal lighten-1" pTooltip="รายการบัญทึกล่าสุด"
+            tooltipPosition="top" (click)="opsave()"><i class="material-icons">replay</i></button>
+
+          <button *ngIf="openpage" class="btn-floating btn-large halfway-fab waves-effect waves-light  teal lighten-1" pTooltip="เพิ่มใหม่"
+            tooltipPosition="top" (click)="opCancel()"><i class="material-icons">add</i></button>
+        </div>
+        <div class="card-content">
+          <ul class="collapsible" data-collapsible="accordion">
+            <li *ngIf="openlist">
+              <div class="collapsible-header"><i class="material-icons">list</i>ตัวเลือกหมวดหมู่</div>
+              <div class="collapsible-body">
+                <app-c-main-cat></app-c-main-cat>
+              </div>
+            </li>
+          </ul>
+          <app-c-out-list *ngIf="openlist" [apiKey]="apikeyListOut" (getList)="listData($event)"></app-c-out-list>
+          <app-c-out-form *ngIf="openform" [fromlistData]="fromlistData" (onCancel)="okCancel($event)"></app-c-out-form>
+          <app-c-out-listout *ngIf="openpage" [apikeyListup]="apikeyListup"></app-c-out-listout>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 
 
 
 
+
+
+
+
+
 <!-- Modal Structure -->
-<div id="modal1" class="modal">
+<!--<div id="modal1" class="modal">
   <div class="modal-content">
     <p-panel header="แก้ไขข้อมูล" [toggleable]="true">
       <form (ngSubmit)="save();">
@@ -79,7 +110,7 @@
         <div class="row">
           <div class="col s2">
             <label> คงเหลือ</label>
-            <input [(ngModel)]="model.numstockin" id="numstockin" name="numstockin" type="number"  disabled>
+            <input [(ngModel)]="model.numstockin" id="numstockin" name="numstockin" type="number" disabled>
           </div>
           <div class="col s4">
             <label> จำนวนเบิกจ่าย * <span class="badge yellow" (click)="getmn()" pTooltip="คลิกเบิกทั้งหมด" tooltipPosition="top">เบิกทั้งหมด</span></label>
@@ -119,4 +150,4 @@
   <div class="modal-footer">
 
   </div>
-</div>
+</div>-->

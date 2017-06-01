@@ -1,0 +1,45 @@
+<div class="row">
+  <div class="card" style="margin:10px">
+    <div class="card-content">
+      <h5 class="header">
+        รหัสวัสดุ :: {{showProduct && showProduct['mcode'] }}<br /> ชื่อวัสดุ :: {{showProduct && showProduct['mname']}}
+      </h5>
+      <h6> ยอดยกมา :: {{showProduct && showProduct['historical']}} {{ showProduct && showProduct['munit']}} มูลค่า : {{showProduct
+        && showProduct['historicalvalue']}} บาท</h6>
+      <h6>
+        จำนวนคงคลัง :: {{models1|sums2:'numstockin':'numstockout' |number}} {{showProduct && showProduct['munit'] }}
+      </h6>
+      <h6>
+        มูลค่าคงคลัง :: {{models1|sums2:'pricelot':'priceout' |number}} บาท
+      </h6>
+    </div>
+    <a class="btn-floating halfway-fab waves-effect waves-light red" pTooltip="ปิดหน้าต่าง" tooltipPosition="top" (click)="doCancel()"><i class="material-icons">cancel</i></a>
+  </div>
+</div>
+<p-dataTable [value]="models1">
+  <p-column header="ลำดับ" [sortable]="true" [style]="{'width':'60px','text-align':'center'}">
+    <ng-template let-col let-rowData="rowData" let-rowIndex="rowIndex" pTemplate="body">
+      {{rowIndex+1}}
+    </ng-template>
+  </p-column>
+  <p-column field="notelot" header="หมายเหตุ" [style]="{'text-align':'center'}"></p-column>
+  <p-column field="datestock" header="วันที่ทำรายการ" [style]="{'text-align':'center'}"></p-column>
+  <p-column field="supname" header="บริษัท" [style]="{'text-align':'center'}"></p-column>
+  <p-column field="numstockin" header="จำนวนรับเข้า" [style]="{'text-align':'center'}"></p-column>
+  <p-column field="pricen" header="ราคา/น" [style]="{'text-align':'center'}"></p-column>
+  <p-column field="pricelot" header="มูลค่า" [style]="{'text-align':'center'}"></p-column>
+  <p-column field="numstockout" header="จำนวนเบิกจ่าย" [style]="{'text-align':'center','color':'#ff00aa'}"></p-column>
+  <p-column field="priceout" header="มูลค่า" [style]="{'text-align':'center','color':'#ff00aa'}"></p-column>
+  <p-column field="rcname" header="ผู้เบิกจ่าย" [style]="{'text-align':'center','color':'#ff00aa'}"></p-column>
+  <p-footerColumnGroup>
+    <p-row>
+      <p-column footer="รวม :" colspan="4"></p-column>
+      <p-column footer="{{models1|sums:'numstockin'|number}}"></p-column>
+      <p-column footer="{{models1|sums:'pricen'|number}}"></p-column>
+      <p-column footer="{{models1|sums:'pricelot'|number}}"></p-column>
+      <p-column footer="{{models1|sums:'numstockout'|number}}"></p-column>
+      <p-column footer="{{models1|sums:'priceout'|number}}"></p-column>
+      <p-column></p-column>
+    </p-row>
+  </p-footerColumnGroup>
+</p-dataTable>

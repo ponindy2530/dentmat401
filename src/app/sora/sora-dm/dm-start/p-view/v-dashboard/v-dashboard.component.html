@@ -1,0 +1,46 @@
+<div class="row">
+  <div class="col s12 m12 l6">
+    <div class="card">
+      <div class="card-action">
+        <a href="#">การเบิกใช้วัสดุ ในรพ. กับ รพสต</a>
+      </div>
+      <div class="card-content">
+        <app-c-charts-pie [apiKey]="apiKeypie"></app-c-charts-pie>
+      </div>
+    </div>
+  </div>
+  <div class="col s12 m12 l6">
+    <div class="card">
+      <div class="card-action">
+        <a href="#">มูลค่าสินค้ามากที่สุด Top 10</a>
+      </div>
+      <div class="card-content">
+        <app-c-charts-top10 [apiKey]="apiKeytop10"></app-c-charts-top10>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="row">
+  <div class="col s12 m12 l6">
+    <div class="card">
+      <div class="card-action">
+        <a href="#">รายไตรมาส</a>
+      </div>
+      <div class="card-content">
+        <app-c-charts-month [apiKey]="apiKey2"></app-c-charts-month>
+      </div>
+    </div>
+  </div>
+  <div class="col s12 m12 l6">
+    <div class="card">
+      <div class="card-action">
+        <a href="#">รายเดือน</a>
+      </div>
+      <div class="card-content">
+        <app-c-charts-month [apiKey]="apiKey1"></app-c-charts-month>
+      </div>
+    </div>
+  </div>
+</div>

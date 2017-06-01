@@ -16,8 +16,7 @@ export class DmStartComponent extends SoraBaseComponent implements OnInit {
 
   ngOnInit() {
     jQuery(".button-collapse").sideNav();
-
-    this._Router.navigate(['dmstart/dmtest']);
+    // this._Router.navigate(['dmstart/dashboard']);
 
   }
 

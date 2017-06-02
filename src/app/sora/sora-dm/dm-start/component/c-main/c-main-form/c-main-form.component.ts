@@ -88,7 +88,7 @@ export class CMainFormComponent extends SoraBaseComponent implements OnInit, OnC
   }
 
   @Output() formsuccess = new EventEmitter;
-
+  @Output() formsuccesssace = new EventEmitter;
   saveto() {
     this.model.hcode = this.hcode;
     this.model.usernames = '1';
@@ -109,11 +109,23 @@ export class CMainFormComponent extends SoraBaseComponent implements OnInit, OnC
           (dismiss) => {
             if (dismiss === 'timer') {
               this.model = new MainproductDt();
-              this.formsuccess.emit(true);
+              if (this.updateId < 1) {
+                this.formsuccess.emit(true)
+              } else {
+                this.formsuccess.emit(false);
+              }
+
             }
           });
       }
       );
+  }
+
+
+
+ @Output() getlitsnewsx = new EventEmitter;
+  getlitsnews(){
+this.getlitsnewsx.emit(true);
   }
 
 

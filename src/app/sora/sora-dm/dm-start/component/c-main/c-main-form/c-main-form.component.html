@@ -11,13 +11,13 @@
               <div class="col s12 m6 l6">
                 <div class="col s12">
                   <label class="pbz"> รหัสวัสดุทันตกรรม</label>
-                  <input class="pbz" type="text" [(ngModel)]="model.mcode" id="mcode" name="mcode">
+                  <input class="pbz" type="text" [(ngModel)]="model.mcode" id="mcode" name="mcode" (change)="getlitsnews()">
                 </div>
               </div>
               <div class="col s12 m6 l6">
                 <div class="col s12">
                   <label class="pbz">ชื่อวัสดุทันตกรรม</label>
-                  <input class="pbz" type="text" [(ngModel)]="model.mname" id="mname" name="mname">
+                  <input class="pbz" type="text" [(ngModel)]="model.mname" id="mname" name="mname" (change)="getlitsnews()">
                 </div>
               </div>
             </div>

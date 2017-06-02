@@ -1,5 +1,5 @@
 import { SoraBaseComponent } from './../../../../../sora-shared/sora-base/sora-base.component';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-c-main-sup',
@@ -30,6 +30,13 @@ export class CMainSupComponent extends SoraBaseComponent implements OnInit {
         }
       }
       );
+  }
+
+
+  @Output() gettosup = new EventEmitter();
+  doSelectFilter(ev: any) {
+    let supId = ev.supid;
+    this.gettosup.emit(supId);
   }
 
 }

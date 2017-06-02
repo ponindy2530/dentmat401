@@ -31,14 +31,16 @@ export class VMainComponent implements OnInit {
   oplistnew: boolean = false;
   opshowlistform: boolean = false;
   tolist: string;
-  shallow: string;
+  apiKeylist: number;
+
+  apiKeylistnew: number = 49;
   getFilter(ev: string) {
     if (ev.length >= 2) {
       this.opform = false;
       this.oplist = true;
       this.tolist = ev;
+      this.apiKeylist = 47;
 
-      this.shallow = _.clone(ev); //ก๊อปค่าไว้
     } else {
       this.oplist = false;
     }
@@ -58,6 +60,8 @@ export class VMainComponent implements OnInit {
     this.oplist = false;
     this.opsc = false;
     this.opcat = false;
+    this.oplistnew = true;
+    this.dataaddform = new MainproductDt;
   }
 
   outform() {
@@ -90,12 +94,42 @@ export class VMainComponent implements OnInit {
   }
 
   formsuccess2(ev: any) {
-    this.opform = false
-    this.opcat = true;
-    this.opsc = true;
-    // this.oplistnew = true;
-    this.dataaddform = new MainproductDt;
-    // this.getFilter(this.shallow);
+    if (ev == true) {
+      this.oplistnew = true;
+      this.dataaddform = new MainproductDt;
+    } else {
+      this.opform = false;
+      this.opcat = true;
+      this.opsc = true;
+      this.oplistnew = false;
+      this.dataaddform = new MainproductDt;
+
+    }
+
+  }
+
+
+  gettocat2(ev: string) {
+    this.opform = false;
+    this.oplist = true;
+    this.tolist = ev;
+    this.apiKeylist = 51;
+  }
+
+  gettosup2(ev: string) {
+    this.opform = false;
+    this.oplist = true;
+    this.tolist = ev;
+    this.apiKeylist = 38;
+  }
+
+  getlitsnewsx(ev: any) {
+    this.oplistnew = false;
+  }
+
+
+  getdataeditlist2(ev: any) {
+    this.dataaddform = ev;
   }
 
 

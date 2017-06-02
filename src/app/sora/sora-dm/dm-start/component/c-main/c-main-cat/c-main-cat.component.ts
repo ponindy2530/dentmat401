@@ -1,5 +1,5 @@
 import { SoraBaseComponent } from './../../../../../sora-shared/sora-base/sora-base.component';
-import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, SimpleChanges, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-c-main-cat',
@@ -23,6 +23,12 @@ export class CMainCatComponent extends SoraBaseComponent implements OnInit {
 
       });
     this.loading = false;
+  }
+
+  @Output() gettocat = new EventEmitter();
+  getcat(ev: any) {
+    let catId = ev.catid;
+    this.gettocat.emit(catId);
   }
 
 

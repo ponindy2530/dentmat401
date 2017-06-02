@@ -2,7 +2,7 @@
 <div class="row" *ngIf="!loading">
   <div class="col s12 m2 l2" *ngFor="let item of models">
     <div class="card">
-      <a href="javascript:void(0)" pTooltip="{{item.catname}}" tooltipPosition="top">
+      <a href="javascript:void(0)" (click)="getcat(item)" pTooltip="{{item.catname}}" tooltipPosition="top">
         <div class="card-image">
           <img src="assets/{{item.catname}}.png">
           <span class="card-title">{{item.shortname}}</span>

@@ -12,27 +12,30 @@ import * as _ from "lodash";
 export class CMainListComponent extends SoraBaseComponent implements OnInit, OnChanges {
 
   @Input() apiKey: string;
+  @Input() apiKeylist: number;
   shallow: string;
-  ngOnChanges(changes: SimpleChanges): void {
-    let getText = changes['apiKey'].currentValue;
+  shallow2: string;
+  ngOnChanges(){
+    let getText = this.apiKey;
+    let getapiKeylist = this.apiKeylist;
     this.shallow = _.clone(getText); //ก๊อปค่าไว้
-    this.onText(getText);
+    this.shallow2 = _.clone(getapiKeylist); //ก๊อปค่าไว้
+    this.onText(getText, getapiKeylist);
+
+    console.log(getText);
+    console.log(getapiKeylist);
+
+
 
   }
 
-  onText(ev: string) {
-    if (ev.length >= 2) {
-      this._ServiceMainService.getData4(47, this.hcode, this.datestart, this.dateend, ev)
-        .subscribe(res => this.models = res,
-        err => console.log(err)
-        , () => {
-          // console.log(this.models);
-
-        });
-
-    } else {
-      this.models = [];
-    }
+  onText(ev, getapiKeylist) {
+    this._ServiceMainService.getData4(getapiKeylist, this.hcode, this.datestart, this.dateend, ev)
+      .subscribe(res => this.models = res,
+      err => console.log(err)
+      , () => {
+        console.log(this.models);
+      });
   }
 
   @Output() getdatashow = new EventEmitter();
@@ -76,7 +79,7 @@ export class CMainListComponent extends SoraBaseComponent implements OnInit, OnC
           .subscribe(resproducts => this.del = resproducts,
           err => console.log(err),
           () => {
-            this.onText(this.shallow);
+            this.onText(this.shallow, this.shallow2);
             swal(
               'ระบบทำการลบ!',
               'ข้อมูลเรียบร้อยแล้ว',

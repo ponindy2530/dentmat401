@@ -22,7 +22,7 @@
 
           <app-c-main-scformlest *ngIf="opshowlistform" [tolistform2]="tolistform2" (getdataformshow)="getdataformshow2($event)"></app-c-main-scformlest>
 
-          <app-c-main-form *ngIf="opform" [dataaddform]="dataaddform" (formsuccess)="formsuccess2($event)"></app-c-main-form>
+          <app-c-main-form *ngIf="opform" [dataaddform]="dataaddform" (formsuccess)="formsuccess2($event)" (getlitsnewsx)="getlitsnewsx($event)"></app-c-main-form>
 
           <app-c-main-search *ngIf="opsc" (onFilter)="getFilter($event);"></app-c-main-search>
 
@@ -40,19 +40,19 @@
                     </ul>
                   </div>
                   <div id="test1" class="col s12">
-                    <app-c-main-cat></app-c-main-cat>
+                    <app-c-main-cat (gettocat)="gettocat2($event)"></app-c-main-cat>
                   </div>
                   <div id="test2" class="col s12">
-                    <app-c-main-sup></app-c-main-sup>
+                    <app-c-main-sup (gettosup)="gettosup2($event)"></app-c-main-sup>
                   </div>
                 </div>
               </div>
             </li>
           </ul>
 
-          <app-c-main-listnew *ngIf="oplistnew"></app-c-main-listnew>
+          <app-c-main-listnew *ngIf="oplistnew" [apiKeylistnew]="apiKeylistnew" (getdataeditlist)="getdataeditlist2($event)"></app-c-main-listnew>
 
-          <app-c-main-list *ngIf="oplist" [apiKey]="tolist" (getdatashow)="getdatashow2($event);" (getdataedit)="getdataedit2($event)"></app-c-main-list>
+          <app-c-main-list *ngIf="oplist" [apiKey]="tolist" [apiKeylist]="apiKeylist" (getdatashow)="getdatashow2($event);" (getdataedit)="getdataedit2($event)"></app-c-main-list>
 
 
         </div>

@@ -26,3 +26,9 @@
     width: 90%;
     max-height: 1000px;
 }
+
+.container {
+  margin: 0 auto;
+  max-width: 1280px;
+  width: 90%;
+}

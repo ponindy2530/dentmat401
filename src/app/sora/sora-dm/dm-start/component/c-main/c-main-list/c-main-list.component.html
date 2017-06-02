@@ -1,4 +1,4 @@
-<p-dataTable sortOrder="-1" [(selection)]="selectedCar" [value]="models" [rows]="10" [paginator]="true" [pageLinks]="5" [rowsPerPageOptions]="[20,40,60,80,100]"
+<p-dataTable sortOrder="-1"  [value]="models" [rows]="10" [paginator]="true" [pageLinks]="5" [rowsPerPageOptions]="[20,40,60,80,100]"
   [responsive]="true" sortField="catname" rowGroupMode="subheader" groupField="catname" [globalFilter]="gb">
   <ng-template pTemplate="rowgroupheader" let-rowData><i class="ace-icon fa fa-folder-open"></i> หมวดหมุ่ : {{rowData['catname']}}</ng-template>
   <p-column header="ลำดับ" [sortable]="true" [style]="{'width':'60px','text-align':'center'}">
@@ -32,7 +32,7 @@
   </p-column>
   <p-column styleClass="col-button" header="ลบข้อมูล" [style]="{'width':'60px','text-align':'center'}">
     <ng-template let-car="rowData" let-rowIndex="rowIndex" pTemplate="body">
-      <a class="btn-floating btn-small red" href="javascript:void(0)" pTooltip="ลบข้อมูล" tooltipPosition="top" (click)="delete(car,rowIndex)"> <i class="material-icons">delete</i></a>
+      <a class="btn-floating btn-small red" href="javascript:void(0)" pTooltip="ลบข้อมูล" tooltipPosition="top" (click)="delete(car)"> <i class="material-icons">delete</i></a>
     </ng-template>
   </p-column>
 </p-dataTable>
